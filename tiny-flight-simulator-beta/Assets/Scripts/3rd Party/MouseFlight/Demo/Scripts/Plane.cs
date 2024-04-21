@@ -4,6 +4,8 @@
 //
 
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace MFlight.Demo
 {
@@ -17,6 +19,8 @@ namespace MFlight.Demo
     [RequireComponent(typeof(Rigidbody))]
     public class Plane : MonoBehaviour
     {
+        [Header("HUD")]
+        public TextMeshProUGUI speedText;
         [Header("Components")]
         [SerializeField] private MouseFlightController controller = null;
 
@@ -138,6 +142,11 @@ namespace MFlight.Demo
                                                 turnTorque.y * yaw,
                                                 -turnTorque.z * roll) * forceMult,
                                     ForceMode.Force);
+            float speedMS = rigid.velocity.magnitude;
+            float speedKMH = speedMS*3.6f;
+            if(speedText != null){
+                speedText.text = "Vitesse: " + speedKMH.ToString("F1") + " km/h";
+            }
         }
     }
 }
