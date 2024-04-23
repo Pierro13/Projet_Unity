@@ -6,6 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 namespace MFlight.Demo
 {
@@ -21,6 +22,8 @@ namespace MFlight.Demo
     {
         [Header("HUD")]
         public TextMeshProUGUI speedText;
+        public TextMeshProUGUI altitudeText;
+        public TextMeshProUGUI directionText;
         [Header("Components")]
         [SerializeField] private MouseFlightController controller = null;
 
@@ -144,9 +147,32 @@ namespace MFlight.Demo
                                     ForceMode.Force);
             float speedMS = rigid.velocity.magnitude;
             float speedKMH = speedMS*3.6f;
+            float altitude = transform.position.y*10;
             if(speedText != null){
                 speedText.text = "Vitesse: " + speedKMH.ToString("F1") + " km/h";
             }
+
+            if(altitudeText != null){
+                altitudeText.text = "Altitude: " + altitude.ToString("F0") + " m";
+            }
+            UpdateDirection();
+        }
+
+        private void UpdateDirection()
+        {
+            Vector3 forward = transform.forward;
+            forward.y = 0;
+            float headingAngle = Quaternion.LookRotation(forward).eulerAngles.y;
+            Console.WriteLine("Angle" + headingAngle);
+            string direction = AngleToDirection(headingAngle);
+            if(directionText != null){
+                directionText.text = "Cap: " + direction;
+            }
+        }
+
+        private string AngleToDirection(float angle){
+            string[] directions = {"Nord", "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord"};
+            return directions[(int)Mathf.Round(((angle % 360) / 45 ))];
         }
     }
 }

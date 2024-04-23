@@ -5,14 +5,21 @@ using UnityEngine;
 public class Options : MonoBehaviour
 {
     public GameObject Panel;
-    bool visible = false;
+    bool isPaused = false;
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)){
-            visible = !visible;
-            Panel.SetActive(visible);
+            isPaused = !isPaused;
+            Panel.SetActive(isPaused);
+
+            if(isPaused){
+                Time.timeScale = 0f;
+            }
+            else{
+                Time.timeScale = 1f;
+            }
         }
     }
 }
