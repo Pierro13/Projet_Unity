@@ -194,6 +194,23 @@ namespace MFlight.Demo
             string[] directions = {"Nord", "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord"};
             return directions[(int)Mathf.Round(((angle % 360) / 45 ))];
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag("Checkpoint")){
+                Debug.Log("Checkpoint reached!");
+                // change the color of the checkpoint
+                other.GetComponent<MeshRenderer>().material.color = Color.green;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Checkpoint"))
+            {
+                //other.gameObject.SetActive(false);
+            }
+        }
     }
 }
 
