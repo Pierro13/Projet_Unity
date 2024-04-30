@@ -5,26 +5,44 @@ using UnityEngine;
 
 public class DirectionalArrow : MonoBehaviour
 {
-    [SerializeField] private Transform target;
     [SerializeField] private List<Transform> checkpoints = new List<Transform>();
-    
-    public void SetTarget(Transform target)
+    private Transform _currentTarget;
+
+    private void Start()
     {
-        this.target = target;
+        // Initialize the first checkpoint as the current target
+        if (checkpoints.Count > 0)
+        {
+            _currentTarget = checkpoints[0];
+            _currentTarget.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
     {
-        /*foreach(Transform checkpoint in checkpoints)
+        if (_currentTarget != null)
         {
-            if (checkpoint.GetComponent<MeshRenderer>().material.color != Color.green)
-            {
-                target = checkpoint;
-                break;
-            }
-        }*/
-        //Vector3 targetPosition = target.transform.position;
-        //targetPosition.y = transform.position.y;
-        transform.LookAt(target);
+            // Rotate the arrow to point towards the current target
+            transform.LookAt(_currentTarget);
+        }
+    }
+
+    public void SetNextTarget()
+    {
+        int currentIndex = checkpoints.IndexOf(_currentTarget);
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex < checkpoints.Count)
+        {
+            _currentTarget.gameObject.SetActive(false);
+            _currentTarget = checkpoints[nextIndex];
+            _currentTarget.gameObject.SetActive(true);
+        }
+        else
+        {
+            _currentTarget = null;
+            gameObject.SetActive(false);
+        }
     }
 }
+
