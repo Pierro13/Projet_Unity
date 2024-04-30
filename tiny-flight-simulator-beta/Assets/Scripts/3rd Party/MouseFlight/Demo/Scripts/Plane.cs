@@ -28,9 +28,10 @@ namespace MFlight.Demo
         [SerializeField] private MouseFlightController controller = null;
 
         [Header("Physics")]
-        [Tooltip("Force to push plane forwards with")] public float thrust = 100f;
+        [Tooltip("Force to push plane forwards with")] public float thrust = 0.0f;
         [Tooltip("Pitch, Yaw, Roll")] public Vector3 turnTorque = new Vector3(90f, 25f, 45f);
         [Tooltip("Multiplier for all forces")] public float forceMult = 1000f;
+        [Tooltip("Changing the thrust")] public float acceleration = 100.0f;
 
         [Header("Autopilot")]
         [Tooltip("Sensitivity for autopilot flight.")] public float sensitivity = 5f;
@@ -49,6 +50,8 @@ namespace MFlight.Demo
 
         private bool rollOverride = false;
         private bool pitchOverride = false;
+
+        public ThrustManager thrustManager;
 
         private void Awake()
         {
@@ -89,6 +92,19 @@ namespace MFlight.Demo
             yaw = autoYaw;
             pitch = (pitchOverride) ? keyboardPitch : autoPitch;
             roll = (rollOverride) ? keyboardRoll : autoRoll;
+
+            bool throtleForward = Input.GetKey(KeyCode.B);
+            bool throtleBackward = Input.GetKey(KeyCode.N);
+            if(throtleForward){
+                if(thrust<250){
+                    thrust += acceleration*Time.deltaTime;
+                }
+            }
+            if(throtleBackward){
+                if(thrust>0){
+                    thrust -= acceleration*Time.deltaTime;
+                }
+            }
         }
 
         private void RunAutopilot(Vector3 flyTarget, out float yaw, out float pitch, out float roll)
@@ -141,6 +157,9 @@ namespace MFlight.Demo
             // Ultra simple flight where the plane just gets pushed forward and manipulated
             // with torques to turn.
             rigid.AddRelativeForce(Vector3.forward * thrust * forceMult, ForceMode.Force);
+            if(thrustManager != null){
+                thrustManager.UpdateThrustBar(thrust/250.0f);
+            }
             rigid.AddRelativeTorque(new Vector3(turnTorque.x * pitch,
                                                 turnTorque.y * yaw,
                                                 -turnTorque.z * roll) * forceMult,
@@ -156,6 +175,7 @@ namespace MFlight.Demo
                 altitudeText.text = "Altitude: " + altitude.ToString("F0") + " m";
             }
             UpdateDirection();
+            
         }
 
         private void UpdateDirection()
