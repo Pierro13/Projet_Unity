@@ -31,7 +31,7 @@ namespace MFlight.Demo
         [Tooltip("Force to push plane forwards with")] public float thrust = 0.0f;
         [Tooltip("Pitch, Yaw, Roll")] public Vector3 turnTorque = new Vector3(90f, 25f, 45f);
         [Tooltip("Multiplier for all forces")] public float forceMult = 1000f;
-        [Tooltip("Changing the thrust")] public float acceleration = 100.0f;
+        [Tooltip("Changing the thrust")] public float acceleration = 5.0f;
 
         [Header("Autopilot")]
         [Tooltip("Sensitivity for autopilot flight.")] public float sensitivity = 5f;
@@ -52,6 +52,8 @@ namespace MFlight.Demo
         private bool pitchOverride = false;
 
         public ThrustManager thrustManager;
+        public float smoothFactor = 0.1f; // Permet d'augmenter progressivement le thrust
+        public float maxThrust = 250.0f;
 
         private void Awake()
         {
@@ -95,16 +97,18 @@ namespace MFlight.Demo
 
             bool throtleForward = Input.GetKey(KeyCode.B);
             bool throtleBackward = Input.GetKey(KeyCode.N);
+            float targetThrust = thrust;
             if(throtleForward){
                 if(thrust<250){
-                    thrust += acceleration*Time.deltaTime;
+                    targetThrust = Mathf.Min(thrust + acceleration, maxThrust);
                 }
             }
             if(throtleBackward){
                 if(thrust>0){
-                    thrust -= acceleration*Time.deltaTime;
+                    targetThrust = Mathf.Max(thrust - acceleration, 0);
                 }
             }
+            thrust = Mathf.Lerp(thrust, targetThrust, smoothFactor);
         }
 
         private void RunAutopilot(Vector3 flyTarget, out float yaw, out float pitch, out float roll)
@@ -193,6 +197,21 @@ namespace MFlight.Demo
         private string AngleToDirection(float angle){
             string[] directions = {"Nord", "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord"};
             return directions[(int)Mathf.Round(((angle % 360) / 45 ))];
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag("Checkpoint")){
+                // change the color of the checkpoint
+                other.GetComponent<MeshRenderer>().material.color = Color.green;
+                
+                // Set the next target
+                DirectionalArrow directionalArrow = FindObjectOfType<DirectionalArrow>();
+                if (directionalArrow != null)
+                {
+                    directionalArrow.SetNextTarget();
+                }
+            }
         }
     }
 }
