@@ -7,6 +7,7 @@ public class DirectionalArrow : MonoBehaviour
 {
     [SerializeField] private List<Transform> checkpoints = new List<Transform>();
     private Transform _currentTarget;
+    public static bool isComplete = false;
 
     private void Start()
     {
@@ -26,7 +27,23 @@ public class DirectionalArrow : MonoBehaviour
             transform.LookAt(_currentTarget);
         }
     }
-
+    
+    public Transform GetCurrentTarget()
+    {
+        return _currentTarget;
+    }
+    
+    public void SetCheckpoints(List<Transform> newCheckpoints)
+    {
+        checkpoints = newCheckpoints;
+        if (checkpoints.Count > 0)
+        {
+            _currentTarget = checkpoints[0];
+            isComplete = false;
+            _currentTarget.gameObject.SetActive(true);
+        }
+    }
+    
     public void SetNextTarget()
     {
         int currentIndex = checkpoints.IndexOf(_currentTarget);
@@ -41,6 +58,7 @@ public class DirectionalArrow : MonoBehaviour
         else
         {
             _currentTarget = null;
+            isComplete = true;
             gameObject.SetActive(false);
         }
     }
