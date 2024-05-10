@@ -23,7 +23,7 @@ public class QuestPanel : MonoBehaviour
             objectivesString += "- " + objective.objectiveName;
             if (objective.isCompleted)
             {
-                objectivesString += " (Complet)";
+                objectivesString += " (Complété)";
             }
             objectivesString += "\n";
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Objective : MonoBehaviour
 {
     public string objectiveName;
-    public bool isCompleted = false;
+    public bool isCompleted;
     
     public void Complete()
     {

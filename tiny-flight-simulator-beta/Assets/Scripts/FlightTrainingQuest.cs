@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Plane = MFlight.Demo.Plane;
 
 public class FligtTrainingQuest : MonoBehaviour
 {
@@ -36,18 +37,26 @@ public class FligtTrainingQuest : MonoBehaviour
 
     private void Update()
     {
-        bool checkpointsReached = DirectionalArrow.isComplete;
-        //QuestPanel questPanel = FindObjectOfType<QuestPanel>();
         QuestManager questManager = QuestManager.instance;
-
-        if (checkpointsReached)
+        bool checkpointsReached = DirectionalArrow.isComplete;
+        Plane playerPlane = FindObjectOfType<Plane>();
+        //Plane playerPlane = GameObject.FindGameObjectWithTag("Player").GetComponent<Plane>();
+        float playerSpeed = playerPlane.GetComponent<Rigidbody>().velocity.magnitude;
+        
+        if (questManager!= null)
         {
-            if (questManager!= null)
+            if(playerSpeed > 0.1f)
+            {
+                questManager.CompleteObjective("Entrainement de vol", "Démarrer le moteur et décoller");
+                questPanel.UpdateQuestPanel(QuestManager.instance.quests[0]);
+            }
+            
+            if (checkpointsReached)
             {
                 questManager.CompleteObjective("Entrainement de vol", "Trajet Entrainement");
-                questPanel.gameObject.SetActive(false);
+                questPanel.UpdateQuestPanel(QuestManager.instance.quests[0]);
+                //questPanel.gameObject.SetActive(false);
             }
         }
     }
-    
 }
