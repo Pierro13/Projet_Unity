@@ -7,13 +7,14 @@ public class DirectionalArrow : MonoBehaviour
 {
     [SerializeField] private List<Transform> checkpoints = new List<Transform>();
     private Transform _currentTarget;
-    public static bool isComplete = false;
+    public static bool isComplete;
 
     private void Start()
     {
         // Initialize the first checkpoint as the current target
         if (checkpoints.Count > 0)
         {
+            isComplete = false;
             _currentTarget = checkpoints[0];
             _currentTarget.gameObject.SetActive(true);
         }
