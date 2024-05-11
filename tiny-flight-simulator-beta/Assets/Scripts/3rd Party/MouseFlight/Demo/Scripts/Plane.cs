@@ -201,11 +201,19 @@ namespace MFlight.Demo
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Checkpoint")){
+            if (other.CompareTag("Checkpoint")) 
+            {
                 // change the color of the checkpoint
                 other.GetComponent<MeshRenderer>().material.color = Color.green;
                 
                 // Set the next target
+                DirectionalArrow directionalArrow = FindObjectOfType<DirectionalArrow>();
+                if (directionalArrow != null)
+                {
+                    directionalArrow.SetNextTarget();
+                }
+            } else if (other.CompareTag("TransitionArea"))
+            {
                 DirectionalArrow directionalArrow = FindObjectOfType<DirectionalArrow>();
                 if (directionalArrow != null)
                 {

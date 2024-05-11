@@ -57,7 +57,7 @@ public class FligtTrainingQuest : MonoBehaviour
             
             if (checkpointsReached)
             {
-                questManager.CompleteObjective("Entrainement de vol", "Trajet Entrainement");
+                questManager.CompleteObjective("Entrainement de vol", "Suivre le trajet d'entrainement");
                 questPanel.UpdateQuestPanel(_quest);
                 //questPanel.gameObject.SetActive(false);
             }

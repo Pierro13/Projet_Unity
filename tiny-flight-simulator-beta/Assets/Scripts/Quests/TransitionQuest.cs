@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,6 @@ public class TransitionQuest : MonoBehaviour
     
     private void Start()
     {
-        // Activer le panneau de quête
-        //gameObject.SetActive(true);
         if (directionalArrow != null)
         {
             directionalArrow.SetCheckpoints(new List<Transform> {checkpoint});
@@ -28,6 +27,21 @@ public class TransitionQuest : MonoBehaviour
             if (questPanel != null)
             {
                 questPanel.gameObject.SetActive(true);
+                questPanel.UpdateQuestPanel(_quest);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        QuestManager questManager = QuestManager.instance;
+        bool checkpointReached = DirectionalArrow.isComplete;
+        
+        if (questManager != null)
+        {
+            if (checkpointReached)
+            {
+                questManager.CompleteObjective("Quête de transition", "Atteindre l'objectif");
                 questPanel.UpdateQuestPanel(_quest);
             }
         }
