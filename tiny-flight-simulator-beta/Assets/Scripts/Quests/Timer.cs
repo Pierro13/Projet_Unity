@@ -12,13 +12,12 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI countdownText;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         countdownText.gameObject.SetActive(true);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (isCountdown)
