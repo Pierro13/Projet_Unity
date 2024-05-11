@@ -6,7 +6,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private float timeRemaining;
-    private float countdownTime = 6.0f;
+    private float countdownTime = 3.0f;
     public bool isTimerRunning;
     public bool isCountdown = true;
     [SerializeField] private TextMeshProUGUI timerText;
@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         countdownText.gameObject.SetActive(true);
+        isTimerRunning = true;
     }
     
     void Update()
@@ -50,7 +51,7 @@ public class Timer : MonoBehaviour
             }
         }
     }
-
+    
     private void updateTimer(float timeLeft, TextMeshProUGUI timerTextArea)
     {
         int minutes = Mathf.FloorToInt(timeLeft / 60); 

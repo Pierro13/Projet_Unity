@@ -11,12 +11,14 @@ public class Quest : MonoBehaviour
     public int questReward;
     // public bool isActive;
     public bool isComplete;
+    public bool isFailed = false;
     
     public void StartQuest()
     {
         // isActive = true;
         Debug.Log("Starting quest: " + questName);
         isComplete = false;
+        isFailed = false;
         foreach (Objective objective in objectives)
         {
             objective.ResetObjective();
@@ -31,6 +33,16 @@ public class Quest : MonoBehaviour
             objective.Complete();
             CheckQuestCompletion();
         }
+    }
+    
+    public void failObjective(string objectiveName)
+    {
+        Objective objective = objectives.Find(x => x.objectiveName == objectiveName);
+        if (objective != null)
+        {
+            objective.Failed();
+        }
+        isFailed = true;
     }
 
     public void CheckQuestCompletion()

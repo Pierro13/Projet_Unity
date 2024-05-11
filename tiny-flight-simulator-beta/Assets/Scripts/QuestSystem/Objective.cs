@@ -7,16 +7,24 @@ public class Objective : MonoBehaviour
 {
     public string objectiveName;
     public bool isCompleted;
+    public bool isFailed = false;
     
     public void Complete()
     {
         isCompleted = true;
         Debug.Log("Objective Completed: " + objectiveName);
     }
+    
+    public void Failed()
+    {
+        isFailed = true;
+        Debug.Log("Objective Failed: " + objectiveName);
+    }
 
     // Réinitialise l'état de l'objectif (pour rejouer une quete)
     public void ResetObjective()
     {
         isCompleted = false;
+        isFailed = false;
     }
 }

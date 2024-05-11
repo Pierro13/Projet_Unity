@@ -40,6 +40,29 @@ public class QuestManager : MonoBehaviour
                 nextQuest.StartQuest();
             }
         }
+
+        if (currentQuest.isFailed)
+        {
+            if (_currentQuestIndex > 0)
+            {
+                // Passer à la quête précédente
+                _currentQuestIndex--;
+                Quest prevQuest = quests[_currentQuestIndex];
+
+                // Désactiver la quête actuelle et activer la précédente
+                currentQuest.isFailed = false;
+                currentQuest.gameObject.SetActive(false);
+                prevQuest.gameObject.SetActive(true);
+
+                // Démarrer la quête précédente
+                prevQuest.StartQuest();
+                //QuestPanel questPanel = FindObjectOfType<QuestPanel>();
+                // if (questPanel != null)
+                // {
+                //     questPanel.UpdateQuestPanel(prevQuest);
+                // }
+            }
+        }
     }
 
     private void StartFirstQuest()
@@ -81,6 +104,19 @@ public class QuestManager : MonoBehaviour
         if (quest != null)
         {
             quest.CompleteObjective(objectiveName);
+        }
+        else
+        {
+            Debug.LogWarning("Quest " + questName + " not found");
+        }
+    }
+    
+    public void failObjective(string questName, string objectiveName)
+    {
+        Quest quest = quests.Find(x => x.questName == questName);
+        if (quest != null)
+        {
+            quest.failObjective(objectiveName);
         }
         else
         {

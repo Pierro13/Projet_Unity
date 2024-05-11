@@ -6,7 +6,7 @@ using Plane = MFlight.Demo.Plane;
 
 public class FligtTrainingQuest : MonoBehaviour
 {
-    [SerializeField] private List<Transform> checkpoints = new List<Transform>();
+    [SerializeField] private List<Transform> checkpoints;
     [SerializeField] private QuestPanel questPanel;
     [SerializeField] private DirectionalArrow directionalArrow;
     //private QuestManager questManager = QuestManager.instance;
