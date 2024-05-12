@@ -26,7 +26,10 @@ public class QuestPanel : MonoBehaviour
                 objectivesString += " (Complété)";
             } else if (objective.isFailed)
             {
-                objectivesString += " (Echoué)";
+                objectivesString += " (Échoué)";
+            } else
+            {
+                objectivesString += " (Non complété)";
             }
             objectivesString += "\n";
         }

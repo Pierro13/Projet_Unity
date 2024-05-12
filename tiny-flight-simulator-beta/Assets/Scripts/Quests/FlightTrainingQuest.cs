@@ -44,7 +44,7 @@ public class FligtTrainingQuest : MonoBehaviour
         Plane playerPlane = FindObjectOfType<Plane>();
         //Plane playerPlane = GameObject.FindGameObjectWithTag("Player").GetComponent<Plane>();
         float playerSpeed = playerPlane.GetComponent<Rigidbody>().velocity.magnitude;
-        bool isPlayerFlying = false;
+        //bool isPlayerFlying = false;
         
         if (questManager!= null)
         {
@@ -52,7 +52,7 @@ public class FligtTrainingQuest : MonoBehaviour
             {
                 questManager.CompleteObjective("Entrainement de vol", "Démarrer le moteur et décoller");
                 questPanel.UpdateQuestPanel(_quest);
-                isPlayerFlying = true;
+                //isPlayerFlying = true;
             }
             
             if (checkpointsReached)

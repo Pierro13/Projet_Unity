@@ -11,7 +11,7 @@ public class Quest : MonoBehaviour
     public int questReward;
     // public bool isActive;
     public bool isComplete;
-    public bool isFailed = false;
+    public bool isFailed;
     
     public void StartQuest()
     {
@@ -35,14 +35,14 @@ public class Quest : MonoBehaviour
         }
     }
     
-    public void failObjective(string objectiveName)
+    public void FailObjective(string objectiveName)
     {
         Objective objective = objectives.Find(x => x.objectiveName == objectiveName);
         if (objective != null)
         {
-            objective.Failed();
+            objective.Fail();
+            isFailed = true;
         }
-        isFailed = true;
     }
 
     public void CheckQuestCompletion()

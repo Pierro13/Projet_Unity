@@ -10,7 +10,7 @@ public class TransitionQuest : MonoBehaviour
     [SerializeField] private DirectionalArrow directionalArrow;
     private Quest _quest;
     
-    private void Start()
+    private void OnEnable()
     {
         if (directionalArrow != null)
         {
@@ -30,6 +30,11 @@ public class TransitionQuest : MonoBehaviour
                 questPanel.UpdateQuestPanel(_quest);
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        directionalArrow.gameObject.SetActive(false);
     }
 
     private void Update()
