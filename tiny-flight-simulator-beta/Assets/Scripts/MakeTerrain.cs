@@ -41,7 +41,7 @@ public class MakeTerrain : MonoBehaviour
         {
             float x = vertices[v].x + 0.1365143f;
             float z = vertices[v].z + 1.21688f;
-            vertices[v].y = surface.Noise(x, z) * 6;
+            vertices[v].y = surface.Noise(x, z) * 3;
 
             if (vertices[v].y < 0)
             {
