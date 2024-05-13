@@ -26,10 +26,17 @@ public class QuestManager : MonoBehaviour
         StartFirstQuest();    
     }
 
+    public void setCurrentQuestIndex(int index)
+    {
+        quests[_currentQuestIndex].gameObject.SetActive(false);
+        _currentQuestIndex = index;
+        quests[_currentQuestIndex].gameObject.SetActive(true);
+    }
+    
     private void Update()
     {
         Quest currentQuest = quests[_currentQuestIndex];
-        if (currentQuest.isComplete)
+        if (currentQuest.isComplete || currentQuest.isFailed)
         {
             if (_currentQuestIndex < quests.Count - 1)
             {
@@ -38,29 +45,6 @@ public class QuestManager : MonoBehaviour
                 currentQuest.gameObject.SetActive(false);
                 nextQuest.gameObject.SetActive(true);
                 nextQuest.StartQuest();
-            }
-        }
-
-        if (currentQuest.isFailed)
-        {
-            if (_currentQuestIndex > 0)
-            {
-                // Passer à la quête précédente
-                _currentQuestIndex--;
-                Quest prevQuest = quests[_currentQuestIndex];
-
-                // Désactiver la quête actuelle et activer la précédente
-                currentQuest.isFailed = false;
-                currentQuest.gameObject.SetActive(false);
-                prevQuest.gameObject.SetActive(true);
-
-                // Démarrer la quête précédente
-                prevQuest.StartQuest();
-                //QuestPanel questPanel = FindObjectOfType<QuestPanel>();
-                // if (questPanel != null)
-                // {
-                //     questPanel.UpdateQuestPanel(prevQuest);
-                // }
             }
         }
     }
@@ -82,7 +66,7 @@ public class QuestManager : MonoBehaviour
     
     public void StartQuest(string questName)
     {
-        Quest quest = quests.Find(x => x.questName == questName);
+        Quest quest = GetQuest(questName);
         if (quest != null)
         {
             quest.StartQuest();
@@ -100,7 +84,7 @@ public class QuestManager : MonoBehaviour
     
     public void CompleteObjective(string questName, string objectiveName)
     {
-        Quest quest = quests.Find(x => x.questName == questName);
+        Quest quest = GetQuest(questName);
         if (quest != null)
         {
             quest.CompleteObjective(objectiveName);
@@ -111,12 +95,12 @@ public class QuestManager : MonoBehaviour
         }
     }
     
-    public void failObjective(string questName, string objectiveName)
+    public void FailObjective(string questName, string objectiveName)
     {
-        Quest quest = quests.Find(x => x.questName == questName);
+        Quest quest = GetQuest(questName);
         if (quest != null)
         {
-            quest.failObjective(objectiveName);
+            quest.FailObjective(objectiveName);
         }
         else
         {

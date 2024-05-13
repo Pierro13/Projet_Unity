@@ -212,7 +212,7 @@ namespace MFlight.Demo
                 {
                     directionalArrow.SetNextTarget();
                 }
-            } else if (other.CompareTag("TransitionArea"))
+            } else if (other.CompareTag("Area"))
             {
                 DirectionalArrow directionalArrow = FindObjectOfType<DirectionalArrow>();
                 if (directionalArrow != null)

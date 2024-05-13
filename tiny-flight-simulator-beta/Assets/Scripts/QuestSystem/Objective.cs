@@ -6,7 +6,7 @@ using UnityEngine;
 public class Objective : MonoBehaviour
 {
     public string objectiveName;
-    public bool isCompleted;
+    public bool isCompleted = false;
     public bool isFailed = false;
     
     public void Complete()
@@ -15,7 +15,7 @@ public class Objective : MonoBehaviour
         Debug.Log("Objective Completed: " + objectiveName);
     }
     
-    public void Failed()
+    public void Fail()
     {
         isFailed = true;
         Debug.Log("Objective Failed: " + objectiveName);
