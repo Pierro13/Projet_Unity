@@ -15,6 +15,7 @@ public class RaceAgainstTime : MonoBehaviour
     private bool isCountdown = false;
     [SerializeField] private Timer timer;
     private bool questLose = false;
+    private bool firstStart = false;
     
     private void OnEnable()
     {
@@ -66,6 +67,7 @@ public class RaceAgainstTime : MonoBehaviour
         if (timer != null)
         {
             timer.StartTimer();
+            firstStart = true;
         }
     }
 
@@ -89,7 +91,7 @@ public class RaceAgainstTime : MonoBehaviour
                 timer.disableTimer();
                 questPanel.UpdateQuestPanel(_quest);
             }
-            else if (!timer.isTimerRunning && !checkpointsReached)
+            else if (!timer.isTimerRunning && !checkpointsReached && firstStart)
             {
                 questManager.FailObjective("Course contre la montre", "Finir la course");
                 timer.disableTimer();
