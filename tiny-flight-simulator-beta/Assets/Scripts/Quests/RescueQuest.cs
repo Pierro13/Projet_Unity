@@ -19,10 +19,34 @@ public class RescueQuest : MonoBehaviour
         }
         
         QuestManager questManager = QuestManager.instance;
+        if(questManager != null)
+        {
+            questManager.StartQuest("Sauvetage");
+            _quest = questManager.GetQuest("Sauvetage");
+            
+            if(questPanel != null)
+            {
+                questPanel.gameObject.SetActive(true);
+                questPanel.UpdateQuestPanel(_quest);
+            }
+        }
     }
 
     private void Update()
     {
+        QuestManager questManager = QuestManager.instance;
+        bool checkpointsReached = DirectionalArrow.isComplete;
         
+        if(questManager != null)
+        {
+            if(checkpointsReached)
+            {
+                questManager.CompleteObjective("Sauvetage", "Secourir les aventuriers");
+                questPanel.UpdateQuestPanel(_quest);
+            }
+            
+            // aller retour à l'aeroport sauvetage
+            // attérissage puis 
+        }
     }
 }
