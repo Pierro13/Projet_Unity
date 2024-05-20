@@ -34,7 +34,7 @@ public class TransitionQuest : MonoBehaviour
 
     private void OnDisable()
     {
-        directionalArrow.gameObject.SetActive(false);
+        questPanel.gameObject.SetActive(false);
     }
 
     private void Update()

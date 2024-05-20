@@ -8,6 +8,9 @@ public class QuestManager : MonoBehaviour
     public static QuestManager instance;
     [SerializeField] private List<Quest> quests = new List<Quest>();
     private int _currentQuestIndex;
+    [SerializeField] private QuestPanel questPanel;
+    private bool recapVisible = false;
+    
     private void Awake()
     {
         if (instance == null)
@@ -45,7 +48,17 @@ public class QuestManager : MonoBehaviour
                 currentQuest.gameObject.SetActive(false);
                 nextQuest.gameObject.SetActive(true);
                 nextQuest.StartQuest();
+            } else if(!recapVisible)
+            {
+                currentQuest.gameObject.SetActive(false);
+                questPanel.ShowQuestsRecap();
+                recapVisible = true;
             }
+        }
+        
+        if(recapVisible)
+        {
+            Time.timeScale = 0.0f; // Pause the game
         }
     }
 
@@ -77,6 +90,10 @@ public class QuestManager : MonoBehaviour
         }
     }
     
+    public List<Quest> GetQuestList()
+    {
+        return quests;
+    }
     public Quest GetQuest(string questName)
     {
         return quests.Find(x => x.questName == questName);

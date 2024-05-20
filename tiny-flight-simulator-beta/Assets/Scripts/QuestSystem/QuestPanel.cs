@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class QuestPanel : MonoBehaviour
 {
-    public TextMeshProUGUI questTitleText;
-    public TextMeshProUGUI questDescriptionText;
-    public TextMeshProUGUI objectivesText;
-
+    [SerializeField] private TextMeshProUGUI questTitleText;
+    [SerializeField] private TextMeshProUGUI questDescriptionText;
+    [SerializeField] private TextMeshProUGUI objectivesText;
+    [SerializeField] private TextMeshProUGUI questRecapText;
+    
+    private List<string> recapList = new List<string>();
     public void UpdateQuestPanel(Quest quest)
     {
         // Mettre à jour le panneau avec les informations de la quête spécifiée
@@ -34,5 +36,33 @@ public class QuestPanel : MonoBehaviour
             objectivesString += "\n";
         }
         objectivesText.text = objectivesString;
+    }
+
+    public void AddRecap()
+    {
+        QuestManager questManager = QuestManager.instance;
+        if(questManager != null)
+        {
+            List<Quest> quests = questManager.GetQuestList();
+            foreach (Quest quest in quests)
+            {
+                string result = quest.isComplete ? "Succès" : "Échec";
+                recapList.Add(quest.questName + " - " + result);
+            }
+        }
+        /*string result = quest.isComplete ? "Succès" : "Échec";
+        recapList.Add(quest.questName + " - " + result);*/
+    }
+
+    public void ShowQuestsRecap()
+    {
+        AddRecap();
+        string recapString = "";
+        foreach (string recap in recapList)
+        {
+            recapString += recap + "\n";
+        }
+        questRecapText.text = recapString;
+        gameObject.SetActive(true);
     }
 }

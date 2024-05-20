@@ -43,6 +43,11 @@ public class RaceAgainstTime : MonoBehaviour
         }
     }
     
+    private void OnDisable()
+    {
+        questPanel.gameObject.SetActive(false);
+    }
+    
     private IEnumerator StartCountdown()
     {
         isCountdown = true;

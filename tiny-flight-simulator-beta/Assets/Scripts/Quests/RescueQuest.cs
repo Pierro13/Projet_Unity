@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Plane = MFlight.Demo.Plane;
 
 public class RescueQuest : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class RescueQuest : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        questPanel.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         QuestManager questManager = QuestManager.instance;
@@ -42,6 +48,15 @@ public class RescueQuest : MonoBehaviour
             if(checkpointsReached)
             {
                 questManager.CompleteObjective("Sauvetage", "Secourir les aventuriers");
+                questManager.CompleteObjective("Sauvetage", "Ramener les survivants à l'aéroport");
+                questPanel.UpdateQuestPanel(_quest);
+            }
+
+            Plane playerPlane = FindObjectOfType<Plane>();
+            float playerSpeed = playerPlane.GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
+            if (playerSpeed < 0.1f)
+            {
+                questManager.CompleteObjective("Sauvetage", "Attérir et couper le moteur");
                 questPanel.UpdateQuestPanel(_quest);
             }
             
