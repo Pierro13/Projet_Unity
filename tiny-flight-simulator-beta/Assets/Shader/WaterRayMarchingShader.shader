@@ -1,10 +1,10 @@
 Shader "Unlit/WaterRayMarchingShader"
 {
     Properties {
-            _UpVector ("Up Vector", Vector) = (0.0,1.0,0.0)
-            _RightVector ("Up Vector", Vector) = (1.0,0.0,0.0)
-            _ForwardVector ("Up Vector", Vector) = (0.0,0.0,1.0)
-            _MyWorldPosition ("My World Location", Vector) = (0.0,0.0,0.0)
+            // _UpVector ("Up Vector", Vector) = (0.0,1.0,0.0)
+            // _RightVector ("Up Vector", Vector) = (1.0,0.0,0.0)
+            // _ForwardVector ("Up Vector", Vector) = (0.0,0.0,1.0)
+            // _MyWorldPosition ("My World Location", Vector) = (0.0,0.0,0.0)
             _MyWorldCameraLook ("My World Camera Look", Vector) = (0.0,0.0,0.0)
             _SeaBaseColor ("Sea Base Color", Color) = (0.1,0.19,0.22,1.0)
             _SeaWaterColor ("Sea Water Color", Color) = (0.8,0.9,0.6, 1.0)
@@ -20,10 +20,10 @@ Shader "Unlit/WaterRayMarchingShader"
      
             #pragma target 3.0
      
-            float4 _UpVector;
-            float4 _RightVector;
-            float4 _ForwardVector;
-            float3 _MyWorldPosition;
+            // float4 _UpVector;
+            // float4 _RightVector;
+            // float4 _ForwardVector;
+            // float3 _MyWorldPosition;
             float3 _MyWorldCameraLookVector;
             float3 _MyWorldCameraLook;
             fixed4 _SeaBaseColor;
@@ -47,9 +47,9 @@ Shader "Unlit/WaterRayMarchingShader"
             static const int ITER_FRAGMENT_LOW  = 4;
             static const int ITER_FRAGMENT_HIGH = 5;
      
-            static const float SEA_HEIGHT = 0.6;
+            static const float SEA_HEIGHT = 2;
             static const float SEA_CHOPPY = 4.0;
-            static const float SEA_SPEED = 0.8;
+            static const float SEA_SPEED = 2;
             static const float SEA_FREQ = 0.16;
             static const float3 SEA_BASE = _SeaBaseColor.rgb;
             static const float3 SEA_WATER_COLOR = _SeaWaterColor.rgb;
