@@ -51,6 +51,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 7941f5cee8d0c6846be8a6434c40f482, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex1:
+        m_Texture: {fileID: 2800000, guid: 2faaf174b99ba664ca2f2e525f3ef0a4, type: 3}
+        m_Scale: {x: 50, y: 50}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex2:
+        m_Texture: {fileID: 2800000, guid: c9ccada20332cfa43a2e75d81efe00cb, type: 3}
+        m_Scale: {x: 50, y: 0}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -61,21 +73,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Amplitude: 0.052
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _Depth: 17.8
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 0.559
     - _Mode: 0
+    - _NormalStrength: 0.46
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RefractionStrength: 0.24
+    - _Scale: 0.014
     - _SmoothnessTextureChannel: 0
+    - _SoftFactor: 0.31
     - _SpecularHighlights: 1
+    - _Speed: 0.251
     - _SrcBlend: 1
     - _UVSec: 0
     - _WaveFrequency: 4.9
@@ -87,7 +104,7 @@ Material:
     - _DepthColor: {r: 0, g: 0.070905745, b: 0.5019608, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ForwardVector: {r: 0, g: 0, b: 1, a: 1}
-    - _MyWorldCameraLook: {r: 0, g: 0, b: 0, a: 1}
+    - _MyWorldCameraLook: {r: 0, g: 0.806, b: 0, a: 0}
     - _MyWorldPosition: {r: 0, g: 0, b: 0, a: 1}
     - _RightVector: {r: 1, g: 0, b: 0, a: 1}
     - _SeaBaseColor: {r: 0.17182271, g: 0.29283294, b: 0.46226418, a: 1}
