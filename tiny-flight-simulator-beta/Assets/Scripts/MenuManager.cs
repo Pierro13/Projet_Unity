@@ -8,9 +8,11 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("Flight Demo");
+        Time.timeScale = 1.0f;
     }
     
     public void PlayMissionsMode(){
         SceneManager.LoadScene("SceneMerge");
+        Time.timeScale = 1.0f;
     }
 }

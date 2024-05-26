@@ -64,5 +64,7 @@ public class QuestPanel : MonoBehaviour
         }
         questRecapText.text = recapString;
         gameObject.SetActive(true);
+        AudioSource planeEngineAudio = GameObject.Find("PlaneEngineAudio").GetComponent<AudioSource>();
+        planeEngineAudio.Stop();
     }
 }

@@ -11,7 +11,7 @@ public class RaceAgainstTime : MonoBehaviour
     private Quest _quest;
     [SerializeField] private TextMeshProUGUI countdownText;
     
-    [SerializeField] private float countdownTime = 6f;
+    [SerializeField] private float countdownTime;
     private bool isCountdown = false;
     [SerializeField] private Timer timer;
     private bool questLose = false;
@@ -80,6 +80,10 @@ public class RaceAgainstTime : MonoBehaviour
     {
         int seconds = Mathf.FloorToInt(timeLeft % 60);
         countdownText.text = seconds.ToString();
+        if(seconds == 0)
+        {
+            countdownText.text = "GO !";
+        }
     }
     
     private void Update()
