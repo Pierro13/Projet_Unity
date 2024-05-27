@@ -206,6 +206,9 @@ namespace MFlight.Demo
                 // change the color of the checkpoint
                 other.GetComponent<MeshRenderer>().material.color = Color.green;
                 
+                AudioSource planeEngineAudio = GameObject.Find("Ring_Sound").GetComponent<AudioSource>();
+                planeEngineAudio.Play();
+                
                 // Set the next target
                 DirectionalArrow directionalArrow = FindObjectOfType<DirectionalArrow>();
                 if (directionalArrow != null)
