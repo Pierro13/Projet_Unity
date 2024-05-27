@@ -16,9 +16,6 @@ public class DirectionalArrow : MonoBehaviour
         {
             isComplete = false;
             _currentTarget = checkpoints[0];
-
-            _currentTarget.GetComponent<MeshRenderer>().material.color = Color.red;
-
             _currentTarget.gameObject.SetActive(true);
         }
     }
@@ -57,7 +54,6 @@ public class DirectionalArrow : MonoBehaviour
         {
             _currentTarget.gameObject.SetActive(false);
             _currentTarget = checkpoints[nextIndex];
-            _currentTarget.GetComponent<MeshRenderer>().material.color = Color.red;
             _currentTarget.gameObject.SetActive(true);
         }
         else
