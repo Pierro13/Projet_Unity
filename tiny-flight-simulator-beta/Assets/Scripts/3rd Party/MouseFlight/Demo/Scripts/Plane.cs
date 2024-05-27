@@ -55,12 +55,22 @@ namespace MFlight.Demo
         public float smoothFactor = 0.1f; // Permet d'augmenter progressivement le thrust
         public float maxThrust = 250.0f;
 
+        [Header("Systeme de particules")]
+
+        public ParticleSystem smokeParticles;
+        public ParticleSystem smokeParticles2; 
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody>();
 
             if (controller == null)
                 Debug.LogError(name + ": Plane - Missing reference to MouseFlightController!");
+
+            if (smokeParticles == null || smokeParticles2 == null)
+            {
+                Debug.LogError("Le système de particules de fumée n'est pas assigné !");
+            }
         }
 
         private void Update()
@@ -109,6 +119,17 @@ namespace MFlight.Demo
                 }
             }
             thrust = Mathf.Lerp(thrust, targetThrust, smoothFactor);
+
+
+            Debug.Log("thrust: " + thrust);
+
+            var emission = smokeParticles.emission;
+            emission.rateOverTime = thrust / 10; 
+
+            var emission2 = smokeParticles2.emission;
+            emission2.rateOverTime = thrust / 10;
+
+
         }
 
         private void RunAutopilot(Vector3 flyTarget, out float yaw, out float pitch, out float roll)
