@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void PlayFreeModeMap2(){
-        SceneManager.LoadScene("SceneProcéduraleDePierre");
+        SceneManager.LoadScene("SceneLibre");
         Time.timeScale = 1.0f;
     }
 

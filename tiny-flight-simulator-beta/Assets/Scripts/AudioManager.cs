@@ -5,6 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    private float globalVolume = 1f;  // Default volume is 1 (100%)
+
     private List<AudioSource> audioSources;
 
     private void Awake()
@@ -14,6 +16,7 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             audioSources = new List<AudioSource>();
+            LoadVolume();
             Debug.Log("AudioManager initialized.");
         }
         else
@@ -27,42 +30,47 @@ public class AudioManager : MonoBehaviour
         if (!audioSources.Contains(source))
         {
             audioSources.Add(source);
+            ApplyVolume(source);
             Debug.Log("AudioSource registered: " + source.name);
-            // Load volume from PlayerPrefs if it exists
-            string key = "volume_" + source.name;
-            if (PlayerPrefs.HasKey(key))
-            {
-                float volume = PlayerPrefs.GetFloat(key);
-                source.volume = volume;
-                Debug.Log("Loaded volume for " + source.name + ": " + volume);
-            }
         }
     }
 
-    public void SetVolume(AudioSource source, float volume)
+    public void SetVolume(float volume)
     {
-        if (audioSources.Contains(source))
+        globalVolume = volume;
+        PlayerPrefs.SetFloat("globalVolume", volume);
+        ApplyVolumeToAll();
+        Debug.Log("Global volume set to " + volume);
+    }
+
+    public float GetVolume()
+    {
+        return globalVolume;
+    }
+
+    private void ApplyVolume(AudioSource source)
+    {
+        if (source != null)
         {
-            source.volume = volume;
-            string key = "volume_" + source.name;
-            PlayerPrefs.SetFloat(key, volume);
-            Debug.Log("Setting volume for " + source.name + " to " + volume);
-            Debug.Log("Current volume for " + source.name + " is now: " + source.volume);
-        }
-        else
-        {
-            Debug.LogWarning("AudioSource not found: " + source.name);
+            source.volume = globalVolume;
+            Debug.Log("Applied global volume to " + source.name + ": " + globalVolume);
         }
     }
 
-    public float GetVolume(AudioSource source)
+    private void ApplyVolumeToAll()
     {
-        if (audioSources.Contains(source))
+        foreach (var source in audioSources)
         {
-            Debug.Log("Getting volume for " + source.name + ": " + source.volume);
-            return source.volume;
+            ApplyVolume(source);
         }
-        Debug.LogWarning("AudioSource not found: " + source.name);
-        return 1f; // Default volume
+    }
+
+    private void LoadVolume()
+    {
+        if (PlayerPrefs.HasKey("globalVolume"))
+        {
+            globalVolume = PlayerPrefs.GetFloat("globalVolume");
+            Debug.Log("Loaded global volume: " + globalVolume);
+        }
     }
 }

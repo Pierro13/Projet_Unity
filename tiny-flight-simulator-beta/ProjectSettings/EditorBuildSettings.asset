@@ -6,26 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Flight Demo.unity
-    guid: 20dddf1c73edf8b43a45ac49c16cb892
-  - enabled: 1
     path: Assets/_Scenes/Menu.unity
     guid: 1c533a44c5df542a1929d8f1b28658d4
   - enabled: 1
-    path: Assets/_Scenes/SceneMaxime.unity
-    guid: 465b281a0c1b74fd8ac9b3b79a16df14
-  - enabled: 1
-    path: Assets/_Scenes/ScenePierre.unity
-    guid: f9accb1c474bb4e46b4fae97dd15a0cf
-  - enabled: 1
-    path: Assets/_Scenes/SceneJoel.unity
-    guid: aa49790eb80e541699e6de8c4d0961ac
+    path: Assets/_Scenes/Flight Demo.unity
+    guid: 20dddf1c73edf8b43a45ac49c16cb892
   - enabled: 1
     path: Assets/_Scenes/SceneMerge.unity
     guid: 014ac1810ae2adb4bad87ff3bc65e95f
   - enabled: 1
-    path: "Assets/_Scenes/SceneProc\xE9duraleDePierre.unity"
-    guid: 7a71505fe88ad324eada0859152a83fc
+    path: Assets/_Scenes/SceneLibre.unity
+    guid: 412da962763ad4c3e951d54366c29c45
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 2c72c1a5f2cf1774ca235bcb5559048a,
       type: 2}
