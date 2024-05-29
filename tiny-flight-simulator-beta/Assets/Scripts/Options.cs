@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Options : MonoBehaviour
 {
@@ -21,5 +22,10 @@ public class Options : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
+    }
+
+    public void BackMenu(){
+        SceneManager.LoadScene("Menu");
+        Time.timeScale = 1.0f;
     }
 }
