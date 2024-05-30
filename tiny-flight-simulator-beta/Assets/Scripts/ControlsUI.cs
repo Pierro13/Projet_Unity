@@ -6,8 +6,7 @@ using UnityEngine;
 public class ControlsUI : MonoBehaviour
 {
     [SerializeField] private GameObject controlsPanel;
-    private Options options;
-    private Options _options = FindObjectOfType<Options>();
+    
     private void Start()
     {
         controlsPanel.gameObject.SetActive(true);

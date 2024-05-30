@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject freeModePanel;
     public GameObject optionsPanel;
+    public GameObject creditsPanel;
     public void PlayGame()
     {
         SceneManager.LoadScene("Flight Demo");
@@ -41,6 +42,13 @@ public class MenuManager : MonoBehaviour
         if(menuPanel != null && optionsPanel != null){
             menuPanel.SetActive(!menuPanel.activeSelf);
             optionsPanel.SetActive(!optionsPanel.activeSelf);
+        }
+    }
+
+    public void CreditsPanelsVisibility(){
+        if(menuPanel != null && creditsPanel != null){
+            menuPanel.SetActive(!menuPanel.activeSelf);
+            creditsPanel.SetActive(!creditsPanel.activeSelf);
         }
     }
 }
